@@ -6,3 +6,11 @@ What you'll find here:
 - UI, Layout, Meals, Cart Components
 - Css modules
 
+***Home***
+
+![Homepage](/src/assets/github/home.png)
+
+
+***Cart***
+
+![Cart](/src/assets/github/cart.png)
