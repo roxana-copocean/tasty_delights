@@ -23,6 +23,16 @@ function Cart(props) {
 		setShowOrder(true);
 	};
 
+	const submitOrderHandler = (userData) => {
+		fetch('https://tasty-delights-default-rtdb.europe-west1.firebasedatabase.app/orders.json', {
+			method: 'POST',
+			body: JSON.stringify({
+				user: userData,
+				orderedItems: context.items
+			})
+		});
+	};
+
 	// storing the modal actions inside a variable
 	const modalActions = (
 		<div className={styles.actions}>
@@ -59,7 +69,7 @@ function Cart(props) {
 				<span>{totalAmount}</span>
 			</div>
 			{/* conditionally rendering the Checkout */}
-			{showOrder && <Checkout onCancel={props.onCloseCart} />}
+			{showOrder && <Checkout onCancel={props.onCloseCart} onSubmit={submitOrderHandler} />}
 			{/* conditionally rendering the modal actions */}
 			{!showOrder && modalActions}
 		</Modal>

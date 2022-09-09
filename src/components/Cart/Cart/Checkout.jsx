@@ -46,6 +46,14 @@ function Checkout(props) {
 		if (!formIsValid) {
 			return;
 		}
+
+		// calling the onSubmit prop, and giving it the user data we collected
+		props.onSubmit({
+			name: eneteredName,
+			street: eneteredStreet,
+			postalCode: eneteredPostalCode,
+			city: eneteredCity
+		});
 	};
 	return (
 		<form onSubmit={confirmHandler} className={styles.form}>
