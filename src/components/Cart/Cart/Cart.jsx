@@ -7,6 +7,8 @@ import Checkout from './Checkout';
 
 function Cart(props) {
 	const [ showOrder, setShowOrder ] = useState(false);
+	const [ isloading, setisLoading ] = useState(false);
+	const [ orderDidSubmit, setOrderDidSubmit ] = useState(false);
 	const context = useContext(CardContext);
 	const totalAmount = `$${context.totalAmount.toFixed(2)}`;
 	const hasItems = context.items.length > 0;
@@ -23,14 +25,18 @@ function Cart(props) {
 		setShowOrder(true);
 	};
 
-	const submitOrderHandler = (userData) => {
-		fetch('https://tasty-delights-default-rtdb.europe-west1.firebasedatabase.app/orders.json', {
+	const submitOrderHandler = async (userData) => {
+		setisLoading(true);
+		await fetch('https://tasty-delights-default-rtdb.europe-west1.firebasedatabase.app/orders.json', {
 			method: 'POST',
 			body: JSON.stringify({
 				user: userData,
 				orderedItems: context.items
 			})
 		});
+		setisLoading(false);
+		setOrderDidSubmit(true);
+		context.clearCart();
 	};
 
 	// storing the modal actions inside a variable
@@ -46,6 +52,7 @@ function Cart(props) {
 			)}
 		</div>
 	);
+
 	const cartItems = (
 		<ul className={styles['cart-items']}>
 			{context.items.map((item) => (
@@ -61,8 +68,9 @@ function Cart(props) {
 		</ul>
 	);
 
-	return (
-		<Modal onCloseCart={props.onCloseCart}>
+	// storing the modal content so w ecan conditionally show it
+	const cartModalContent = (
+		<React.Fragment>
 			{cartItems}
 			<div className={styles.total}>
 				<span>Total Amount</span>
@@ -72,6 +80,13 @@ function Cart(props) {
 			{showOrder && <Checkout onCancel={props.onCloseCart} onSubmit={submitOrderHandler} />}
 			{/* conditionally rendering the modal actions */}
 			{!showOrder && modalActions}
+		</React.Fragment>
+	);
+	return (
+		<Modal onCloseCart={props.onCloseCart}>
+			{isloading && <p>Sending your order...</p>}
+			{orderDidSubmit && <p>Your order will arive soon!</p>}
+			{!isloading && !orderDidSubmit && cartModalContent}
 		</Modal>
 	);
 }
