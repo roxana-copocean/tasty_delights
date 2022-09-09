@@ -8,6 +8,11 @@ What you'll find here:
 - Css modules
 
 - Firebase for managing the data
+- Sending data we collect with the Form to Firebase
+- Validating the form
+- Validating the user inputs
+- useRef()
+
 
 ***Home***
 
