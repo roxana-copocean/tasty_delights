@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Modal.module.css';
 import ReactDOM from 'react-dom';
 
+// this will use a "onCloseCart handler", that it gets from the App
 const Backdrop = (props) => {
 	return <div className={styles.backdrop} onClick={props.onCloseCart} />;
 };

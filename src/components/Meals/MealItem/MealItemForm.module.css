@@ -17,3 +17,9 @@
 .form button:active {
 	background-color: #590202;
 }
+
+.invalid {
+	font-size: 9px;
+	color: red;
+	text-align: right;
+}

@@ -10,17 +10,21 @@ function Cart(props) {
 	const [ isloading, setisLoading ] = useState(false);
 	const [ orderDidSubmit, setOrderDidSubmit ] = useState(false);
 	const context = useContext(CardContext);
+
 	const totalAmount = `$${context.totalAmount.toFixed(2)}`;
 	const hasItems = context.items.length > 0;
 
+	// Remove - we pass it to the cart Item
 	const cartItemRemoveHnadler = (id) => {
 		context.removeItem(id);
 	};
 
+	// Add - we pass it to the cart item
 	const cartItemAddedHandler = (item) => {
 		context.addItem({ ...item, amount: 1 });
 	};
 
+	//  Order
 	const orderHandler = () => {
 		setShowOrder(true);
 	};
@@ -53,6 +57,7 @@ function Cart(props) {
 		</div>
 	);
 
+	// Cart Items
 	const cartItems = (
 		<ul className={styles['cart-items']}>
 			{context.items.map((item) => (

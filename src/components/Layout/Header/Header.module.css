@@ -28,8 +28,6 @@
 	height: 100%;
 	object-fit: cover;
 	background-position: contain;
-
-	/* transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem); */
 }
 
 h1 {

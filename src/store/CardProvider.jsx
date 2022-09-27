@@ -3,16 +3,19 @@ import React, { useReducer } from 'react';
 import CardContext from './cart-context';
 
 // Our default Cart state and our reducer function
-
 const defaultCartState = {
 	items: [],
 	totalAmount: 0
 };
 
+// ---------------------------------------------------------------------------------------
 const cartReducer = (state, action) => {
+	// ADD
 	if (action.type === 'ADD') {
+		// updating the total amount
 		const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
 
+		// checking for the same item with the same id
 		const existingCartItemIndex = state.items.findIndex((item) => item.id === action.item.id);
 		const existingCardItem = state.items[existingCartItemIndex];
 
@@ -33,12 +36,14 @@ const cartReducer = (state, action) => {
 			totalAmount: updatedTotalAmount
 		};
 	}
-
+	// REMOVE
 	if (action.type === 'REMOVE') {
 		const existingCartItemIndex = state.items.findIndex((item) => item.id === action.id);
 		const existingCardItem = state.items[existingCartItemIndex];
+
 		const updatedTotalAmount = state.totalAmount - existingCardItem.price;
 		let updatedItems;
+		// if it's the last item
 		if (existingCardItem.amount === 1) {
 			updatedItems = state.items.filter((item) => item.id !== action.id);
 		} else {
@@ -51,23 +56,28 @@ const cartReducer = (state, action) => {
 			totalAmount: updatedTotalAmount
 		};
 	}
+	// CLEAR
 	if (action.type === 'CLEAR') {
 		return defaultCartState;
 	}
 	return defaultCartState;
 };
 
-// our CartProvider
+// ---------------------------------------------------------------------------------------
 
+// CartProvider
 function CartProvider(props) {
 	const [ cartState, dispatchCartAction ] = useReducer(cartReducer, defaultCartState);
 
+	// add item handler - addItem
 	const addItemToCardHandler = (item) => {
 		dispatchCartAction({
 			type: 'ADD',
 			item: item
 		});
 	};
+
+	// remove item handler- removeItem
 	const removeItemFromCartHandler = (id) => {
 		dispatchCartAction({
 			type: 'REMOVE',
@@ -75,9 +85,12 @@ function CartProvider(props) {
 		});
 	};
 
+	// clear cart handler- clearCart
 	const clearTheCartHandler = () => {
 		dispatchCartAction({ type: 'CLEAR' });
 	};
+
+	// The value for the Provider
 	const cartContext = {
 		items: cartState.items,
 		totalAmount: cartState.totalAmount,

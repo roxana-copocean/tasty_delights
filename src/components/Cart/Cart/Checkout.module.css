@@ -63,3 +63,9 @@
 	border-color: #aa0b20;
 	background-color: #ffeff1;
 }
+
+.invalidInput {
+	font-size: 10px;
+	color: grey;
+	text-align: left;
+}

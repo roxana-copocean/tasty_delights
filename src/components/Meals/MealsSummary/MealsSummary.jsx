@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './MealsSummary.module.css';
 
+// Meals Summary
 function MealsSummary() {
 	return (
 		<section className={styles.summary}>

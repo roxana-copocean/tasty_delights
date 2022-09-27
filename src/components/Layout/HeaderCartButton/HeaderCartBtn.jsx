@@ -30,10 +30,13 @@ export default function HeaderCartBtn(props) {
 	);
 	return (
 		<button className={btnClasses} onClick={props.onClick}>
+			{/* cart icon */}
 			<span className={styles.icon}>
 				<CartIcon />
 			</span>
+			{/* cart text */}
 			<span>Your Cart</span>
+			{/* cart total amount of items */}
 			<span className={styles.badge}>{numberOfCartItems}</span>
 		</button>
 	);

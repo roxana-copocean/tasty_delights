@@ -17,10 +17,8 @@ function AvailableMeals() {
 			if (!response.ok) {
 				throw new Error('Something went wrong!');
 			}
-
 			const data = await response.json();
-
-			// transforming our data into an array
+			// transforming the data from an obj to an array
 			const loadedMeals = [];
 			for (const key in data) {
 				loadedMeals.push({
@@ -33,14 +31,14 @@ function AvailableMeals() {
 			setMeals(loadedMeals);
 			setLoading(false);
 		};
-
 		// handling error inside of a promise
 		fetchMeals().catch((error) => {
 			setLoading(false);
 			setError(error.message);
 		});
 	}, []);
-
+	// ---------------------------------------------------------------------------------
+	// loading
 	if (loading) {
 		return (
 			<section className={styles.loading}>
@@ -49,6 +47,7 @@ function AvailableMeals() {
 		);
 	}
 
+	// error
 	if (error) {
 		return (
 			<section>
@@ -56,6 +55,8 @@ function AvailableMeals() {
 			</section>
 		);
 	}
+
+	// mealsList
 	const mealsList = meals.map((meal) => {
 		return (
 			<MealItem key={meal.id} price={meal.price} description={meal.description} name={meal.name} id={meal.id} />

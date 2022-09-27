@@ -60,22 +60,22 @@ function Checkout(props) {
 			<div className={`${styles.control} ${formInputsValidity.name ? '' : styles.invalid}`}>
 				<label htmlFor="name">Your Name</label>
 				<input type="text" id="name" ref={nameRef} />
-				{!formInputsValidity.name && <p>Enter a valid name!</p>}
+				{!formInputsValidity.name && <p className={styles.invalidInput}>Enter a valid name!</p>}
 			</div>
 			<div className={`${styles.control} ${formInputsValidity.street ? '' : styles.invalid}`}>
 				<label htmlFor="street">Street</label>
 				<input type="text" id="street" ref={streetRef} />
-				{!formInputsValidity.street && <p>Enter a valid street!</p>}
+				{!formInputsValidity.street && <p className={styles.invalidInput}>Enter a valid street!</p>}
 			</div>
 			<div className={`${styles.control} ${formInputsValidity.postalCode ? '' : styles.invalid}`}>
 				<label htmlFor="postalCode">Postal Code</label>
 				<input type="text" id="postalCode" ref={postalCodeRef} />
-				{!formInputsValidity.postalCode && <p>Enter a valid postal code!</p>}
+				{!formInputsValidity.postalCode && <p className={styles.invalidInput}>Enter a valid postal code!</p>}
 			</div>
 			<div className={`${styles.control} ${formInputsValidity.city ? '' : styles.invalid}`}>
 				<label htmlFor="city">City</label>
 				<input type="text" id="city" ref={cityRef} />
-				{!formInputsValidity.city && <p>Enter a valid city!</p>}
+				{!formInputsValidity.city && <p className={styles.invalidInput}>Enter a valid city!</p>}
 			</div>
 			<div className={styles.actions}>
 				<button type="button" onClick={props.onCancel}>
