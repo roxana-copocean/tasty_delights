@@ -29,6 +29,7 @@ function Cart(props) {
 		setShowOrder(true);
 	};
 
+	// sending the form data and cart data to firebase
 	const submitOrderHandler = async (userData) => {
 		setisLoading(true);
 		await fetch('https://tasty-delights-default-rtdb.europe-west1.firebasedatabase.app/orders.json', {
@@ -73,7 +74,7 @@ function Cart(props) {
 		</ul>
 	);
 
-	// storing the modal content so w ecan conditionally show it
+	// storing the modal content and then conditionally render it inside the modal
 	const cartModalContent = (
 		<React.Fragment>
 			{cartItems}
